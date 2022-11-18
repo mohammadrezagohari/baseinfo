@@ -1,0 +1,25 @@
+{
+    "name": "pagination",
+    "description": "It's a package for pagination laravel content",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "MohammadReza Gohari",
+            "email": "eng.mr.gohari@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Gohari\\Pagination\\": "src/"
+        }
+    },
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Gohari\\Pagination\\PaginationServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev"
+}
