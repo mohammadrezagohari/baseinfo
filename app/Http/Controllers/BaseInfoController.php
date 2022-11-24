@@ -8,16 +8,17 @@ use App\Http\Requests\BaseInfoUpdateRequest;
 use App\Http\Resources\BaseInfoCollection;
 use App\Repositories\MongoDB\BaseInfoRepository\BaseInfoRepository;
 
+use App\Repositories\MongoDB\BaseInfoRepository\IBaseInfoRepository;
 use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 
 class BaseInfoController extends Controller
 {
     /****************************************************
-     * @var BaseInfoRepository $baseInfoRepository
+     * @var IBaseInfoRepository $baseInfoRepository
      ****************************************************/
-    private BaseInfoRepository $baseInfoRepository;
+    private IBaseInfoRepository $baseInfoRepository;
 
-    public function __construct(BaseInfoRepository $IBaseInfoRepository)
+    public function __construct(IBaseInfoRepository $IBaseInfoRepository)
     {
         $this->baseInfoRepository = $IBaseInfoRepository;
     }
