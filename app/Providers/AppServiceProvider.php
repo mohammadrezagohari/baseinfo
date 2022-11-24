@@ -2,6 +2,11 @@
 
 namespace App\Providers;
 
+use App\Repositories\MongoDB\BaseInfoRepository\BaseInfoRepository;
+use App\Repositories\MongoDB\BaseInfoRepository\IBaseInfoRepository;
+use App\Repositories\MongoDB\BaseRepository;
+use App\Repositories\MongoDB\IBaseRepository;
+use Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Sanctum\PersonalAccessToken;
 use Illuminate\Foundation\AliasLoader;
@@ -19,8 +24,10 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('local')) {
             $this->app->register(\Laravel\Telescope\TelescopeServiceProvider::class);
             $this->app->register(TelescopeServiceProvider::class);
-            $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
+            $this->app->register(IdeHelperServiceProvider::class);
         }
+        $this->app->bind(IBaseRepository::class,BaseRepository::class,);
+        $this->app->bind(IBaseInfoRepository::class,BaseInfoRepository::class,);
     }
 
     /**
