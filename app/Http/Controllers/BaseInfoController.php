@@ -14,13 +14,13 @@ use Symfony\Component\HttpFoundation\Response as HTTPResponse;
 class BaseInfoController extends Controller
 {
     /****************************************************
-     * @var IBaseInfoRepository $baseInfoRepository
+     * @var IBaseInfoRepository $baseInfoRepositoryInterface
      ****************************************************/
-    private IBaseInfoRepository $baseInfoRepository;
+    private IBaseInfoRepository $baseInfoRepositoryInterface;
 
     public function __construct(IBaseInfoRepository $IBaseInfoRepository)
     {
-        $this->baseInfoRepository = $IBaseInfoRepository;
+        $this->baseInfoRepositoryInterface = $IBaseInfoRepository;
     }
 
     /**
@@ -30,7 +30,7 @@ class BaseInfoController extends Controller
      */
     public function index($page = null, $per_page = 2)
     {
-        return new BaseInfoCollection($this->baseInfoRepository->getAllWithPaginate($per_page, $page));
+        return new BaseInfoCollection($this->baseInfoRepositoryInterface->getAllWithPaginate($per_page, $page));
     }
 
     /**
@@ -51,7 +51,7 @@ class BaseInfoController extends Controller
      */
     public function store(BaseInfoStoreRequest $request)
     {
-        return $this->baseInfoRepository->insertData($request->all());
+        return $this->baseInfoRepositoryInterface->insertData($request->all());
     }
 
     /**
@@ -62,7 +62,7 @@ class BaseInfoController extends Controller
      */
     public function show($id)
     {
-        return $this->baseInfoRepository->findById($id);
+        return $this->baseInfoRepositoryInterface->findById($id);
     }
 
     /**
@@ -85,7 +85,7 @@ class BaseInfoController extends Controller
      */
     public function update($id, BaseInfoUpdateRequest $request)
     {
-        if ($this->baseInfoRepository->updateData($id, $request))
+        if ($this->baseInfoRepositoryInterface->updateData($id, $request))
             return response()->json(['message' => 'successfully your transaction!'], HTTPResponse::HTTP_OK);
         return response()->json(['message' => 'sorry, your transaction fails!'], HTTPResponse::HTTP_BAD_REQUEST);
     }
@@ -98,7 +98,7 @@ class BaseInfoController extends Controller
      */
     public function destroy($id)
     {
-        if ($this->baseInfoRepository->deleteData($id))
+        if ($this->baseInfoRepositoryInterface->deleteData($id))
             return response()->json(['message' => 'successfully your transaction!'], HTTPResponse::HTTP_OK);
         return response()->json(['message' => 'sorry, your transaction fails!'], HTTPResponse::HTTP_BAD_REQUEST);
     }
